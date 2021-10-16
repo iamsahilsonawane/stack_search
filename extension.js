@@ -14,10 +14,19 @@ async function activate(context) {
         return;
       }
       const tags = inputTag.split(",");
-      const soResponse = await axios.get(
-        `https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&tagged=${tags
-          .map((tagStr) => tagStr.trim())
-          .join(";")}&site=stackoverflow`
+      var soResponse;
+      await vscode.window.withProgress(
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: "Fetching Questions",
+        },
+        async (_) => {
+          soResponse = await axios.get(
+            `https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&tagged=${tags
+              .map((tagStr) => tagStr.trim())
+              .join(";")}&site=stackoverflow`
+          );
+        }
       );
       var questions = soResponse.data.items.map((question) => {
         return {
