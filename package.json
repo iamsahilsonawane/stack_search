@@ -21,7 +21,11 @@
         "linksManager.config.getFavoriteTags": {
           "type": "string",
           "default": "StackOverflow",
-          "description": "Add comma-separated favorite tags"
+          "description": "Add comma-separated favorite tags",
+          "examples": [
+            "flutter,dart",
+            "python,pycharm"
+          ]
         }
       }
     },
