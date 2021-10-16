@@ -10,14 +10,29 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:personal-links-manager.getQuestionsFromSO"
+    "onCommand:personal-links-manager.getQuestionsFromSO",
+    "onCommand:personal-links-manager.getFavQuestionsFromSO"
   ],
   "main": "./extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Personal Links Manager",
+      "properties": {
+        "linksManager.config.getFavoriteTags": {
+          "type": "string",
+          "default": "StackOverflow",
+          "description": "Add comma-separated favorite tags"
+        }
+      }
+    },
     "commands": [
       {
         "command": "personal-links-manager.getQuestionsFromSO",
         "title": "Search Stack Overflow"
+      },
+      {
+        "command": "personal-links-manager.getFavQuestionsFromSO",
+        "title": "Favorite Search Stack Overflow"
       }
     ]
   },
