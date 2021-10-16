@@ -21,6 +21,7 @@ async function activate(context) {
           title: "Fetching Questions",
         },
         async (_) => {
+          console.log(_);
           soResponse = await axios.get(
             `https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&tagged=${tags
               .map((tagStr) => tagStr.trim())
@@ -35,6 +36,10 @@ async function activate(context) {
           link: question.link,
         };
       });
+      if (questions.length === 0) {
+        vscode.window.showInformationMessage("No questions found for the tags");
+        return;
+      }
 
       var question = await vscode.window.showQuickPick(questions, {
         matchOnDetail: true,
