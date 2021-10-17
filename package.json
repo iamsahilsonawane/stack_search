@@ -11,7 +11,8 @@
   ],
   "activationEvents": [
     "onCommand:personal-links-manager.getQuestionsFromSO",
-    "onCommand:personal-links-manager.getFavQuestionsFromSO"
+    "onCommand:personal-links-manager.getFavQuestionsFromSO",
+    "onCommand:personal-links-manager.getSearchresultsFromSO"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -32,11 +33,15 @@
     "commands": [
       {
         "command": "personal-links-manager.getQuestionsFromSO",
-        "title": "Search Stack Overflow"
+        "title": "Search Stack Overflow Based on Tags"
       },
       {
         "command": "personal-links-manager.getFavQuestionsFromSO",
         "title": "Favorite Search Stack Overflow"
+      },
+      {
+        "command": "personal-links-manager.getSearchresultsFromSO",
+        "title": "Search Question on Stack OverFlow"
       }
     ]
   },
