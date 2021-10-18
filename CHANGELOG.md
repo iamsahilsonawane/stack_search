@@ -27,4 +27,8 @@
 
 ## [0.0.5] - 2021-10-18
 
-- Favorite search issue (error) resolution (iteration 2) (final)
+- Favorite search issue (error) resolution (iteration 2)
+
+## [0.0.6] - 2021-10-18
+
+- Favorite search issue (error) resolution (iteration 3) (final)

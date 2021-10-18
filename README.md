@@ -57,7 +57,11 @@ Favorite tags search issue resolution (iteration 1)
 
 ### 0.0.5
 
-Favorite tags search issue resolution (iteration 2) (final)
+Favorite tags search issue resolution (iteration 2)
+
+### 0.0.6
+
+Favorite tags search issue resolution (iteration 3) (final)
 
 ### For Issues / Pull Requests
 

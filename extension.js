@@ -137,7 +137,7 @@ async function activate(context) {
 async function favQuestionHandler() {
   var favoriteTags = vscode.workspace
     .getConfiguration()
-    .get("stackSearch.config.getFavoriteTags");
+    .get("stackSearch.config.favoriteTags");
 
   const tags = favoriteTags.split(",");
   var soResponse;
