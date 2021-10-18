@@ -1,7 +1,7 @@
 {
-  "name": "personal-links-manager",
-  "displayName": "Personal links manager",
-  "description": "Personal Links Manager!",
+  "name": "stack-search",
+  "displayName": "Stack Search",
+  "description": "Stack Search!",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.61.0"
@@ -10,16 +10,16 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:personal-links-manager.getQuestionsFromSO",
-    "onCommand:personal-links-manager.getFavQuestionsFromSO",
-    "onCommand:personal-links-manager.getSearchresultsFromSO"
+    "onCommand:stack-search.getQuestionsFromSO",
+    "onCommand:stack-search.getFavQuestionsFromSO",
+    "onCommand:stack-search.getSearchResultsFromSO"
   ],
   "main": "./extension.js",
   "contributes": {
     "configuration": {
-      "title": "Personal Links Manager",
+      "title": "Stack Search",
       "properties": {
-        "linksManager.config.getFavoriteTags": {
+        "stackSearch.config.favoriteTags": {
           "type": "string",
           "default": "StackOverflow",
           "description": "Add comma-separated favorite tags",
@@ -32,16 +32,16 @@
     },
     "commands": [
       {
-        "command": "personal-links-manager.getQuestionsFromSO",
-        "title": "Search Stack Overflow Based on Tags"
+        "command": "stack-search.getQuestionsFromSO",
+        "title": "StackSearch: Search with Tags"
       },
       {
-        "command": "personal-links-manager.getFavQuestionsFromSO",
-        "title": "Favorite Search Stack Overflow"
+        "command": "stack-search.getFavQuestionsFromSO",
+        "title": "StackSearch: Favorite Tags"
       },
       {
-        "command": "personal-links-manager.getSearchresultsFromSO",
-        "title": "Search Question on Stack OverFlow"
+        "command": "stack-search.getSearchResultsFromSO",
+        "title": "StackSearch: Search with Query"
       }
     ]
   },

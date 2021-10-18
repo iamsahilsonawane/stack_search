@@ -1,44 +1,44 @@
 const vscode = require("vscode");
 const axios = require("axios");
 
-async function getSOSearch(term, type){
+async function getSOSearch(term, type) {
   if (type == "title") {
-	  return await axios.get(
-		  `https://api.stackexchange.com/2.3/search/advanced?order=asc&sort=votes&title=${term}&site=stackoverflow`
-	  );
+    return await axios.get(
+      `https://api.stackexchange.com/2.3/search/advanced?order=asc&sort=votes&title=${term}&site=stackoverflow`
+    );
   }
   if (type == "query") {
-	  return await axios.get(
-		  `https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=votes&q=${term}&site=stackoverflow`
-	  );
+    return await axios.get(
+      `https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=votes&q=${term}&site=stackoverflow`
+    );
   }
 }
 
 function getQuestionsFromResponse(response) {
-	var questions = response.data.items.map((question) => {
-		return {
-			label: question.title,
-			detail: `By ${question.owner.display_name} | Answers: ${question.answer_count} | Views: ${question.view_count}`,
+  var questions = response.data.items.map((question) => {
+    return {
+      label: question.title,
+      detail: `By ${question.owner.display_name} | Answers: ${question.answer_count} | Views: ${question.view_count}`,
       link: question.link,
-		};
-	});
-	return questions;
+    };
+  });
+  return questions;
 }
 
 async function activate(context) {
   let soSearchDisposable = vscode.commands.registerCommand(
-    "personal-links-manager.getSearchresultsFromSO",
+    "stack-search.getSearchResultsFromSO",
     async function () {
       vscode.window.showInformationMessage("Search the Question");
       var inputQuestion = await vscode.window.showInputBox({
-        placeHolder: "Type the Question Here"
+        placeHolder: "Type your question here",
       });
       if (inputQuestion == "" || inputQuestion == null) {
         vscode.window.showInformationMessage("No Search Terms Provided");
         return;
       }
       var soResponse;
-	  	var questions;
+      var questions;
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Notification,
@@ -46,20 +46,22 @@ async function activate(context) {
         },
         async (_) => {
           console.log(_);
-					soResponse = await getSOSearch(inputQuestion, "title");
-					questions = getQuestionsFromResponse(soResponse);
-						
-		  		if (questions.length === 0) {
-						soResponse = await getSOSearch(inputQuestion, 'query');
-						questions = getQuestionsFromResponse(soResponse);
-					}
+          soResponse = await getSOSearch(inputQuestion, "title");
+          questions = getQuestionsFromResponse(soResponse);
+
+          if (questions.length === 0) {
+            soResponse = await getSOSearch(inputQuestion, "query");
+            questions = getQuestionsFromResponse(soResponse);
+          }
         }
       );
-			if (questions.length === 0) {
-			vscode.window.showInformationMessage("No Questions Found for Search Term");
-			return;
-			}
-      
+      if (questions.length === 0) {
+        vscode.window.showInformationMessage(
+          "No questions found for your search"
+        );
+        return;
+      }
+
       var question = await vscode.window.showQuickPick(questions, {
         matchOnDetail: true,
       });
@@ -73,9 +75,8 @@ async function activate(context) {
   );
 
   let soQuestionsDisposable = vscode.commands.registerCommand(
-    "personal-links-manager.getQuestionsFromSO",
+    "stack-search.getQuestionsFromSO",
     async function () {
-      vscode.window.showInformationMessage("Search for tags");
       var inputTag = await vscode.window.showInputBox({
         placeHolder: "Write comma-separated tags",
       });
@@ -124,7 +125,7 @@ async function activate(context) {
   );
 
   let soFavQuestionsDisposable = vscode.commands.registerCommand(
-    "personal-links-manager.getFavQuestionsFromSO",
+    "stack-search.getFavQuestionsFromSO",
     async function () {
       var favoriteTags = vscode.workspace
         .getConfiguration()
