@@ -1,65 +1,47 @@
-# personal-links-manager README
+![actions](images/stack_search_logo.png)
 
-This is the README for your extension "personal-links-manager". After writing up a brief description, we recommend including the following sections.
+# Stack Search
+
+Stack Search is an open-source extension for VSCode to search on stack overflow. This extension is for developers who actively surf questions on stack overflow to view, comment, answer, cast votes on their particular field / tech stack of choice.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+1. Search questions with Tags:
 
-For example if there is an image subfolder under your extension project workspace:
+- Specify the tags in the input (comma-separated) and get questions containing those tags.
 
-\!\[feature X\]\(images/feature-x.png\)
+2. Search questions with Favorite Tags:
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- Configure favorite tags under settings.
+- Can be achieved either with GUI VSCode settings and under StackSearch. Screenshot below.
+  ![actions](images/settings_gui_screenshot.png)
+- Or adding `"linksManager.config.getFavoriteTags": "tag1,tag2"` to settings.json file. (Replace the tag1 and tag2 with your own). Screenshot below.
+  ![actions](images/settings_json_screenshot.png)
 
-## Requirements
+3. Search questions with Query:
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Specify the query in the input and get questions containing those tags.
+- **Hint**: To get more appropriate results, use minimum amount of keywords. For Eg.: `split list in python` instead of `how to split a list in python?`
+<!-- ## Requirements
+
+If you have any requirements or dependencies, add a section describing those and how to install and configure them. -->
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
 This extension contributes the following settings:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+- `stackSearch.config.favoriteTags`: Add favorite (comma-separated) tags to search for (defaults to stackoverflow)
 
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+<!-- ## Known Issues -->
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
+Initial release of StackSearch with Search with tags, favorite tags & query.
 
-### 1.0.1
+### For Issues / Pull Requests
 
-Fixed issue #.
+Contributions are welcomed :)
 
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+https://github.com/iamsahilsonawane/stack_search

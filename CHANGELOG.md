@@ -1,9 +1,13 @@
 # Change Log
 
-All notable changes to the "personal-links-manager" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [Unreleased]
 
 - Initial release
+
+## [1.0.0] - 2021-10-18
+
+### Added
+
+- New Stack Overflow Search based on Tags.
+- New Stack Overflow Search based on Query.
+- New Stack Overflow Search with Favorite Tags.
