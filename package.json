@@ -2,6 +2,7 @@
   "name": "stack-search",
   "displayName": "Stack Search",
   "description": "Stack Search!",
+  "icon": "images/stack_search_logo.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.61.0"
@@ -14,6 +15,10 @@
     "onCommand:stack-search.getFavQuestionsFromSO",
     "onCommand:stack-search.getSearchResultsFromSO"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamsahilsonawane/stack_search.git"
+  },
   "main": "./extension.js",
   "contributes": {
     "configuration": {
