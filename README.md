@@ -55,6 +55,10 @@ Description Update
 
 Favorite tags search issue resolution (iteration 1)
 
+### 0.0.5
+
+Favorite tags search issue resolution (iteration 2) (final)
+
 ### For Issues / Pull Requests
 
 Contributions are welcomed :)
