@@ -20,3 +20,7 @@
 ## [0.0.3] - 2021-10-18
 
 - Updated desciption
+
+## [0.0.4] - 2021-10-18
+
+- Favorite search issue (error) resolution (iteration 1)

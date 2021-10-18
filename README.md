@@ -51,6 +51,10 @@ README Update
 
 Description Update
 
+### 0.0.4
+
+Favorite tags search issue resolution (iteration 1)
+
 ### For Issues / Pull Requests
 
 Contributions are welcomed :)
