@@ -47,6 +47,10 @@ Initial release of StackSearch with Search with tags, favorite tags & query.
 
 README Update
 
+### 0.0.3
+
+Description Update
+
 ### For Issues / Pull Requests
 
 Contributions are welcomed :)

@@ -1,9 +1,9 @@
 {
   "name": "stack-search",
   "displayName": "Stack Search",
-  "description": "Stack Search!",
+  "description": "Stack Search is an open-source extension for VSCode to search on stack overflow. This extension is for developers who actively surf questions on stack overflow to view, comment, answer, cast votes on their particular field / tech stack of choice.",
   "icon": "images/stack_search_logo.png",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "vByte",
   "engines": {
     "vscode": "^1.61.0"
