@@ -1,36 +1,185 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-const vscode = require('vscode');
+const vscode = require("vscode");
+const axios = require("axios");
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+async function getSOSearch(term, type) {
+  if (type == "title") {
+    return await axios.get(
+      `https://api.stackexchange.com/2.3/search/advanced?order=asc&sort=votes&title=${term}&site=stackoverflow`
+    );
+  }
+  if (type == "query") {
+    return await axios.get(
+      `https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=votes&q=${term}&site=stackoverflow`
+    );
+  }
+}
 
-/**
- * @param {vscode.ExtensionContext} context
- */
-function activate(context) {
+function getQuestionsFromResponse(response) {
+  var questions = response.data.items.map((question) => {
+    return {
+      label: question.title,
+      detail: `By ${question.owner.display_name} | Answers: ${question.answer_count} | Views: ${question.view_count}`,
+      link: question.link,
+    };
+  });
+  return questions;
+}
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "personal-links-manager" is now active!');
+async function activate(context) {
+  let soSearchDisposable = vscode.commands.registerCommand(
+    "stack-search.getSearchResultsFromSO",
+    async function () {
+      vscode.window.showInformationMessage("Search the Question");
+      var inputQuestion = await vscode.window.showInputBox({
+        placeHolder: "Type your question here",
+      });
+      if (inputQuestion == "" || inputQuestion == null) {
+        vscode.window.showInformationMessage("No Search Terms Provided");
+        return;
+      }
+      var soResponse;
+      var questions;
+      await vscode.window.withProgress(
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: "Fetching Questions",
+        },
+        async (_) => {
+          console.log(_);
+          soResponse = await getSOSearch(inputQuestion, "title");
+          questions = getQuestionsFromResponse(soResponse);
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('personal-links-manager.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
+          if (questions.length === 0) {
+            soResponse = await getSOSearch(inputQuestion, "query");
+            questions = getQuestionsFromResponse(soResponse);
+          }
+        }
+      );
+      if (questions.length === 0) {
+        vscode.window.showInformationMessage(
+          "No questions found for your search"
+        );
+        return;
+      }
 
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from Personal links manager!');
-	});
+      var question = await vscode.window.showQuickPick(questions, {
+        matchOnDetail: true,
+      });
 
-	context.subscriptions.push(disposable);
+      if (question == null) {
+        vscode.window.showInformationMessage("No Question Selected");
+        return;
+      }
+      vscode.env.openExternal(question.link);
+    }
+  );
+
+  let soQuestionsDisposable = vscode.commands.registerCommand(
+    "stack-search.getQuestionsFromSO",
+    async function () {
+      var inputTag = await vscode.window.showInputBox({
+        placeHolder: "Write comma-separated tags",
+      });
+      if (inputTag == "" || inputTag == null) {
+        vscode.window.showInformationMessage("No tags provided");
+        return;
+      }
+      const tags = inputTag.split(",");
+      var soResponse;
+      await vscode.window.withProgress(
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: "Fetching Questions",
+        },
+        async (_) => {
+          console.log(_);
+          soResponse = await axios.get(
+            `https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&tagged=${tags
+              .map((tagStr) => tagStr.trim())
+              .join(";")}&site=stackoverflow`
+          );
+        }
+      );
+      var questions = soResponse.data.items.map((question) => {
+        return {
+          label: question.title,
+          detail: `By ${question.owner.display_name} | Answers: ${question.answer_count} | Views: ${question.view_count}`,
+          link: question.link,
+        };
+      });
+      if (questions.length === 0) {
+        vscode.window.showInformationMessage("No Questions Found for the Tags");
+        return;
+      }
+
+      var question = await vscode.window.showQuickPick(questions, {
+        matchOnDetail: true,
+      });
+
+      if (question == null) {
+        vscode.window.showInformationMessage("No Question Selected");
+        return;
+      }
+      vscode.env.openExternal(question.link);
+    }
+  );
+
+  let soFavQuestionsDisposable = vscode.commands.registerCommand(
+    "stack-search.getFavQuestionsFromSO",
+    async function () {
+      var favoriteTags = vscode.workspace
+        .getConfiguration()
+        .get("linksManager.config.getFavoriteTags");
+
+      const tags = favoriteTags.split(",");
+      var soResponse;
+      await vscode.window.withProgress(
+        {
+          location: vscode.ProgressLocation.Notification,
+          title: `Fetching Questions (Tags: ${favoriteTags})`,
+        },
+        async (_) => {
+          console.log(_);
+          soResponse = await axios.get(
+            `https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&tagged=${tags
+              .map((tagStr) => tagStr.trim())
+              .join(";")}&site=stackoverflow`
+          );
+        }
+      );
+      var questions = soResponse.data.items.map((question) => {
+        return {
+          label: question.title,
+          detail: `By ${question.owner.display_name} | Answers: ${question.answer_count} | Views: ${question.view_count}`,
+          link: question.link,
+        };
+      });
+      if (questions.length === 0) {
+        vscode.window.showInformationMessage("No questions found for the tags");
+        return;
+      }
+
+      var question = await vscode.window.showQuickPick(questions, {
+        matchOnDetail: true,
+      });
+
+      if (question == null) {
+        vscode.window.showInformationMessage("No question selected");
+        return;
+      }
+      vscode.env.openExternal(question.link);
+    }
+  );
+
+  context.subscriptions.push(soSearchDisposable);
+  context.subscriptions.push(soQuestionsDisposable);
+  context.subscriptions.push(soFavQuestionsDisposable);
 }
 
 // this method is called when your extension is deactivated
 function deactivate() {}
 
 module.exports = {
-	activate,
-	deactivate
-}
+  activate,
+  deactivate,
+};

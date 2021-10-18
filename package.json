@@ -1,40 +1,67 @@
 {
-	"name": "personal-links-manager",
-	"displayName": "Personal links manager",
-	"description": "Personal Links Manager!",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.61.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:personal-links-manager.helloWorld"
-	],
-	"main": "./extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "personal-links-manager.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
-	"scripts": {
-		"lint": "eslint .",
-		"pretest": "npm run lint",
-		"test": "node ./test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.61.0",
-		"@types/glob": "^7.1.4",
-		"@types/mocha": "^9.0.0",
-		"@types/node": "14.x",
-		"eslint": "^7.32.0",
-		"glob": "^7.1.7",
-		"mocha": "^9.1.1",
-		"typescript": "^4.4.3",
-		"@vscode/test-electron": "^1.6.2"
-	}
+  "name": "stack-search",
+  "displayName": "Stack Search",
+  "description": "Stack Search!",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:stack-search.getQuestionsFromSO",
+    "onCommand:stack-search.getFavQuestionsFromSO",
+    "onCommand:stack-search.getSearchResultsFromSO"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Stack Search",
+      "properties": {
+        "stackSearch.config.favoriteTags": {
+          "type": "string",
+          "default": "StackOverflow",
+          "description": "Add comma-separated favorite tags",
+          "examples": [
+            "flutter,dart",
+            "python,pycharm"
+          ]
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "stack-search.getQuestionsFromSO",
+        "title": "StackSearch: Search with Tags"
+      },
+      {
+        "command": "stack-search.getFavQuestionsFromSO",
+        "title": "StackSearch: Favorite Tags"
+      },
+      {
+        "command": "stack-search.getSearchResultsFromSO",
+        "title": "StackSearch: Search with Query"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.61.0",
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "eslint": "^7.32.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.1",
+    "typescript": "^4.4.3",
+    "@vscode/test-electron": "^1.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.23.0"
+  }
 }
