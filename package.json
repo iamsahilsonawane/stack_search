@@ -4,6 +4,7 @@
   "description": "Stack Search!",
   "icon": "images/stack_search_logo.png",
   "version": "0.0.1",
+  "publisher": "vByte",
   "engines": {
     "vscode": "^1.61.0"
   },
