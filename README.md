@@ -4,6 +4,9 @@
 
 Stack Search is an open-source extension for VSCode to search on stack overflow. This extension is for developers who actively surf questions on stack overflow to view, comment, answer, cast votes on their particular field / tech stack of choice.
 
+Demo:
+![actions](images/demo.gif)
+
 ## Features
 
 1. Search questions with Tags:
@@ -36,9 +39,13 @@ This extension contributes the following settings:
 
 ## Release Notes
 
-### 1.0.0
+### 0.0.1
 
 Initial release of StackSearch with Search with tags, favorite tags & query.
+
+### 0.0.2
+
+README Update
 
 ### For Issues / Pull Requests
 

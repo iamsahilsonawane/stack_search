@@ -4,10 +4,14 @@
 
 - Initial release
 
-## [1.0.0] - 2021-10-18
+## [0.0.1] - 2021-10-18
 
 ### Added
 
 - New Stack Overflow Search based on Tags.
 - New Stack Overflow Search based on Query.
 - New Stack Overflow Search with Favorite Tags.
+
+## [0.0.2] - 2021-10-18
+
+- Updated more practical README

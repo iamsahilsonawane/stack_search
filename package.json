@@ -3,7 +3,7 @@
   "displayName": "Stack Search",
   "description": "Stack Search!",
   "icon": "images/stack_search_logo.png",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "vByte",
   "engines": {
     "vscode": "^1.61.0"
